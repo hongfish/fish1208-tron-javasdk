@@ -1,7 +1,6 @@
 package com.fish1208.util.http;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fish1208.common.constant.Constants;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.*;
 import java.io.*;
-import java.math.BigDecimal;
 import java.net.*;
 import java.security.cert.X509Certificate;
 import java.util.HashMap;
@@ -536,43 +534,4 @@ public class HttpUtils {
         return sb.toString();
     }
 
-
-	public static void main(String[] args) {
-		String address = "0x754288c64725a03849ca636c198576d33cdda67e";
-		int pageNum = 1;
-		int pageSize = 20;
-		String url = "https://trx.tokenview.com/api/trx/address/normal/TBk72yKTJWppCsa7XrsU7Qhfo4yNvbm8rE/1/20";
-		String json = HttpUtils.sendGet(url,null);
-		System.out.print("123");
-		if(com.fish1208.util.StringUtils.isBlank(json)){
-			System.out.print("123");
-		}
-		JSONObject jsonObject = JSONObject.parseObject(json);
-		if(!jsonObject.containsKey("code")){
-			System.out.print("123");
-		}
-		int code = jsonObject.getInteger("code");
-		if(code!=1){//正确
-			System.out.print("123");
-		}
-		JSONArray array = jsonObject.getJSONArray("data");
-		for (Object info : array) {
-			JSONObject dataJson = (JSONObject) info;
-			System.out.print(dataJson);
-			//金额
-			BigDecimal value = dataJson.getBigDecimal("value");
-			if(value.compareTo(BigDecimal.ZERO)==1){//大于0
-				//转出地址
-				String fromAddress = dataJson.getString("from");
-				//转入地址
-				String toAddress = dataJson.getString("to");
-				//hash
-				String txid = dataJson.getString("txid");
-				//手续费
-				BigDecimal fee = dataJson.getBigDecimal("fee");
-				//添加时间
-				Long transactionTime = dataJson.getLong("time");
-			}
-		}
-    }
 }

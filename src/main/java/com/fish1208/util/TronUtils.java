@@ -39,9 +39,6 @@ public class TronUtils {
     public static final String RANDOM="%z#ZCBTOGb!IQPve";
     private static byte addressPreFixByte = (byte) 0x41; // 41 + address (byte) 0xa0; //a0 + address
 
-    public static void main(String[] args) {
-        System.out.println(TronUtils.fromHexAddress(TronUtils.getPrivateKeyToAddress("354486fd5053c5347280597ba0cf57071ce45073b756b9e18bc0cc967b7aa2e3")));
-    }
     public static List<String> createMnemonicCode() {
         SecureRandom secureRandom = new SecureRandom();
         byte[] entropy = new byte[DeterministicSeed.DEFAULT_SEED_ENTROPY_BITS / 8];
